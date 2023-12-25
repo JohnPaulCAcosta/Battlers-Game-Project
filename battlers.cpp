@@ -161,17 +161,97 @@ playerStatus(otherBattler.playerStatus) { //copy constructor for rule of 3
 
 }
 
-Battler::~Battler() {} //destructor for rule of 3 (default deconstructor should work since no dynamic memory)
+Battler::~Battler() {
+
+    /*Deallocate dynamic memory in image*/
+
+    if (this->image != nullptr) {
+
+        for (unsigned int i = 0; i < 15; i++) {
+            delete[] this->image[i];
+            this->image[i] = nullptr;
+        }
+
+        delete[] this->image;
+        this->image = nullptr;
+    }
+
+}
 
 void Battler::SetImage(char new_image[15][10]) {
+
+    /*this SetImage function should be used when creating a new battler, since
+    the an array as an input is created when reading the helper file*/
+
     /*dimensions of input images should always be 15 width x 10 height
-    characters, using column major order*/
+    characters, using column major order so we can use [x][y] logic*/
+
+    /*Deallocate memory for existing image if possible*/
+
+    if (this->image != nullptr) {
+        for (unsigned int i = 0; i < 15; i++) {
+            delete[] this->image[i];
+            this->image[i] = nullptr;
+        }
+    }
+
+    /*Allocate new memory for new image*/
+
+    this->image = new char*[15];
+
+    for (unsigned int i = 0; i < 15; i++) {
+        this->image[i] = new char[10];
+    }
+
+    /*Copy input image to current battler's image*/
 
     for (unsigned int i = 0; i < 15; i++) {
         for (unsigned int j = 0; j < 10; j++) {
             this->image[i][j] = new_image[i][j];
         }
     }
+
+}
+
+void Battler::SetImage(char** new_image) {
+
+    /*this SetImage function should only be used in the copy assignment function*/
+
+    /*dimensions of input images should always be 15 width x 10 height
+    characters, using column major order so we can use [x][y] logic*/
+
+    /*Deallocate memory for existing image if possible*/
+
+    if (this->image != nullptr) {
+
+        for (unsigned int i = 0; i < 15; i++) {
+            delete[] this->image[i];
+            this->image[i] = nullptr;
+        }
+
+        delete[] this->image;
+        this->image = nullptr;
+    }
+
+    /*Allocate new memory for new image*/
+
+    this->image = new char*[15];
+
+    for (unsigned int i = 0; i < 15; i++) {
+        this->image[i] = new char[10];
+    }
+
+    /*Copy input image to current battler's image*/
+
+    for (unsigned int i = 0; i < 15; i++) {
+        for (unsigned int j = 0; j < 10; j++) {
+            this->image[i][j] = new_image[i][j];
+        }
+    }
+
+    /*Deallocation of the new memory from this function as well as
+    from the input image, which should be from another battler, will
+    occur in the deconstructor*/
 
 }
 

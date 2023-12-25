@@ -52,11 +52,12 @@ class Battler {
         bool playerStatus = false;
 
     public:
-        char image[15][10];
+        char** image;
         Battler(string name);
         ~Battler();
         Battler(const Battler& otherBattler);
         void SetImage(char new_image[15][10]);
+        void SetImage(char** new_image);
         void SetType(string type, string strength = "", string weakness = "");
         void SetHealth(double health);
         void SetStats(int pA, int pD, int sA, int sD);
