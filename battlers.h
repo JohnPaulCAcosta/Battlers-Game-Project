@@ -61,14 +61,22 @@ class Battler {
         void SetType(string type, string strength = "", string weakness = "");
         void SetHealth(double health);
         void SetStats(int pA, int pD, int sA, int sD);
+        void SetPhysicalAttack(double pA);
+        void SetSpecialAttack(double sA);
+        void SetPhysicalDefense(double pD);
+        void SetSpecialDefense(double sD);
         void SetPlayingStatus(bool status);
         string GetName();
         double GetHealth();
         string GetMoves();
+        int GetPhysicalAttack();
+        int GetSpecialAttack();
+        int GetPhysicalDefense();
+        int GetSpecialDefense();
         bool GetPlayerStatus();
         void AddMove(string name, string type, char dType, double multiplier);
-        double Attack(Battler& opponent, int t = 0);
-        double CalculateDamage(Move move, char attackType);
+        double Attack(Battler& opponent, int t = 0, int ignore = 0);
+        double CalculateDamage(Battler& opponent, Move move, char attackType);
         double SpecialMoveIdentifier(string move);
         Battler& operator=(const Battler& otherBattler);
 
