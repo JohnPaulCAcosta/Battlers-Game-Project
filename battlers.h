@@ -22,7 +22,7 @@ class Move {
     private:
         string name;
         string attackType;
-        char damageType; //'p' or 's' or 'n'
+        char damageType; //'p' or 's' or 'X'
         double damageMultiplier;
     public:
         Move();

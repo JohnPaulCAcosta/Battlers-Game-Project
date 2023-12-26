@@ -114,13 +114,7 @@ double Battler::Attack(Battler& opponent, int t) {
 
 Battler& Battler::operator=(const Battler& otherBattler) { //copy assignment for rule of 3
     this->name = otherBattler.name;
-
-    for (unsigned int y = 0; y < 10; y++) {
-        for (unsigned int x = 0; x < 15; x++) {
-            this->image[x][y] = otherBattler.image[x][y];
-        }
-    }
-
+    this->SetImage(otherBattler.image);
     this->type = otherBattler.type;
     this->health = otherBattler.health;
     this->physicalAttack = otherBattler.physicalAttack;
@@ -145,7 +139,7 @@ void GlobalSpecialMoves(Battler currBattler, Battler opponentBattler, double neg
 
 Battler::Battler(string name) : name(name), type(Type()), health(0.0), physicalAttack(0),
 physicalDefense(0), specialAttack(0), specialDefense(0), move1(Move()), move2(Move()),
-move3(Move()), playerStatus(false) {}
+move3(Move()), playerStatus(false), image(nullptr) {}
 
 Battler::Battler(const Battler& otherBattler) : name(otherBattler.name), type(otherBattler.type),
 health(otherBattler.health), physicalAttack(otherBattler.physicalAttack), physicalDefense(otherBattler.physicalDefense), 
@@ -153,11 +147,7 @@ specialAttack(otherBattler.specialAttack), specialDefense(otherBattler.specialDe
 move1(otherBattler.move1), move2(otherBattler.move2), move3(otherBattler.move3), 
 playerStatus(otherBattler.playerStatus) { //copy constructor for rule of 3
 
-    for (unsigned int y = 0; y < 10; y++) {
-        for (unsigned int x = 0; x < 15; x++) {
-            this->image[x][y] = otherBattler.image[x][y];
-        }
-    }
+    this->SetImage(otherBattler.image);
 
 }
 
