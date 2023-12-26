@@ -1,5 +1,9 @@
 # Battlers-Game-Project
-This project takes inspiration from Pokemon to create a battler simulator in order to practice C++ concepts such as batch processing functions, dynamic memory, pointers, and classes.
+This project takes inspiration from Pokemon to create a battler simulator in order to practice using C++ concepts: 
+ * batch processing functions
+ * dynamic memory
+ * pointers
+ * classes.
 
 My first project utilizes what I learned in Texas A&M's Introduction to Program Design and Concepts class to Pokemon, a game franchise I grew up with.
 
