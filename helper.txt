@@ -34,7 +34,7 @@ Water
 45.0
 6 1 8 5
 Peck null p 1.8
-Flaming_Devastation Fire s 3.2
+Flaming_Devastation Fire X 3.0
 Flame_Dash Fire p 2.0
                
                
