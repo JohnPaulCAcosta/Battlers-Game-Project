@@ -106,7 +106,7 @@ vector<Battler> selectBattlers(vector<Battler>& allBattlers) {
     cout << endl;
 
     if (numOfUsers == 2) {
-        cout << "Time to choose your battler, Player Two! : " << endl;
+        cout << " Time to choose your battler, Player Two! : ";
         cin >> battler2name;
         cout << endl;
     }
@@ -203,6 +203,7 @@ void battleDisplay(vector<Battler>& battlers) {
             cout << endl;
             cout << "Player 2, what is your move? (select number): ";
             cin >> selected_move;
+            cout << endl;
 
             damage_dealt = battlers.at(1).Attack(battlers.at(0), selected_move);
 
