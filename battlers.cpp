@@ -8,22 +8,49 @@ using namespace std;
 
 //Non-Generic Functions (for my level of knowledge in coding currently)
 
-double Battler::CalculateDamage(Move move, char attackType) {
+double Battler::CalculateDamage(Battler& opponent, Move move, char attackType) {
+
+    double output;
+
     /*the attack's output depends on the battler's stats and type
     in relation to the move's stats and types*/
 
-    /*output = battler's relevant stat times a move's damage multiplier,
-    all of which is multiplied by a multiplier if the types match*/
+    /* output = pA * mM - (pD * mM) / 2 */
 
-    //relevant stat times damage multiplier
+    /*output = battler's relevant attack stat times a move's damage
+    multiplier, minus the opponent's all of which is multiplied by a multiplier if the types match*/
 
-    double output;
+    //relevant attack stat times damage multiplier
 
     if (attackType == 'p') {
         output = this->physicalAttack * move.GetDamageMultiplier();
     }
     if (attackType == 's') {
         output = this->specialAttack * move.GetDamageMultiplier();
+    }
+    //identify if special move used, uses the average of the pA and sA
+    if (attackType == 'X') {
+        output = (this->physicalAttack + this->specialAttack) / 2.0 * move.GetDamageMultiplier();
+    }
+    
+    //relevant defense stat times damage multiplier
+
+    if (attackType == 'p') {
+        output -= ( opponent.physicalDefense * move.GetDamageMultiplier() ) / 2.0;
+    }
+    if (attackType == 's') {
+        output -= ( opponent.specialDefense * move.GetDamageMultiplier() ) / 2.0;
+    }
+    //identify if special move used, uses the average (4 to account for both defense and the ratio of the special move)
+    if (attackType == 'X') {
+        output -= (this->physicalAttack + this->specialAttack) * move.GetDamageMultiplier() / 4.0;
+    }
+
+    //if defense overwhelms the attack, then we shouldn't have a negative output!
+
+    if (output <= 1) {
+        output = 1;
+        cout << "Insignificant hit... maybe try another move..." << endl;
     }
 
     //type matching multiplier
@@ -36,7 +63,7 @@ double Battler::CalculateDamage(Move move, char attackType) {
 
 }
 
-double Battler::Attack(Battler& opponent, int t) {
+double Battler::Attack(Battler& opponent, int t, int ignore) {
     /*if this runs with t = 0, then the battler is not
      controlled by a player!*/
     /*variable 't' is to be overriden by user's choice in Player
@@ -72,8 +99,8 @@ double Battler::Attack(Battler& opponent, int t) {
         }
     }
 
-    if (currMove.GetDamageType() == 'X') {
-
+    if (currMove.GetDamageType() == 'X' && ignore != 1) {
+        //gives a special negative number which determines special attack function
         double special_output = this->SpecialMoveIdentifier(currMove.GetMoveName());
 
         return special_output; /*will check for a negative number outside the class*/
@@ -81,7 +108,7 @@ double Battler::Attack(Battler& opponent, int t) {
     }
     else {
 
-        damage_output = CalculateDamage(currMove, currMove.GetDamageType());
+        damage_output = CalculateDamage(opponent, currMove, currMove.GetDamageType());
 
         if (currMove.GetMoveTypeName() == opponent.type.GetWeakness()) {
             damage_output *= 1.15;
@@ -260,6 +287,22 @@ void Battler::SetStats(int pA, int pD, int sA, int sD) {
     this->specialDefense = sD;
 }
 
+void Battler::SetPhysicalAttack(double pA) {
+    this->physicalAttack = pA;
+}
+
+void Battler::SetSpecialAttack(double sA) {
+    this->specialAttack = sA;
+}
+
+void Battler::SetPhysicalDefense(double pD) {
+    this->physicalDefense = pD;
+}
+
+void Battler::SetSpecialDefense(double sD) {
+    this->specialDefense = sD;
+}
+
 void Battler::SetPlayingStatus(bool status) {
     this->playerStatus = status;
 }
@@ -284,6 +327,22 @@ string Battler::GetMoves() {
     output.append(" ");
 
     return output;
+}
+
+int Battler::GetPhysicalAttack() {
+    return this->physicalAttack;
+}
+
+int Battler::GetSpecialAttack() {
+    return this->specialAttack;
+}
+
+int Battler::GetPhysicalDefense() {
+    return this->physicalDefense;
+}
+
+int Battler::GetSpecialDefense() {
+    return this->specialDefense;
 }
 
 bool Battler::GetPlayerStatus() {
