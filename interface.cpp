@@ -145,7 +145,6 @@ vector<Battler> selectBattlers(vector<Battler>& allBattlers) {
 void battleDisplay(vector<Battler>& battlers) {
 
     int selected_move;
-    double damage_dealt;
 
     cout << "------------------------------------" << endl;
     cout << "                " << battlers.at(0).GetName() << endl;
@@ -184,20 +183,13 @@ void battleDisplay(vector<Battler>& battlers) {
         cin >> selected_move;
         cout << endl;
 
-        damage_dealt = battlers.at(0).Attack(battlers.at(1), selected_move);
+        //helper function using selected move: 
+        InitiateAttackFunctions(battlers.at(0), battlers.at(1), selected_move);
 
-        if (damage_dealt == -99.9) {
-            /*if this runs, the second battler has been defeated!*/
+        if (battlers.at(1).GetHealth() == 0) {
             break;
         }
-        else {
-            /*checking for special moves*/
-            if (damage_dealt == -1.001) {
-                battlers.at(0) = battlers.at(1);
-                battlers.at(0).SetPlayingStatus(true);
-            }
-        }
-
+        
         if (battlers.at(1).GetPlayerStatus()) {
             
             cout << endl;
@@ -205,21 +197,11 @@ void battleDisplay(vector<Battler>& battlers) {
             cin >> selected_move;
             cout << endl;
 
-            damage_dealt = battlers.at(1).Attack(battlers.at(0), selected_move);
+            InitiateAttackFunctions(battlers.at(1), battlers.at(0), selected_move);   //  InitiateAttackFunctions(battlers.at(0), battlers.at(1), selected_move);
 
         }
         else {
-            damage_dealt = battlers.at(1).Attack(battlers.at(0));
-        }
-
-        if (damage_dealt == -99.9) {
-            /*if this runs, the first battler has been defeated!*/
-        }
-        else if (damage_dealt < 0) {
-            /*checking for special moves*/
-            if (damage_dealt == -1.001) {
-                battlers.at(1) = battlers.at(0);
-            }
+            InitiateAttackFunctions(battlers.at(1), battlers.at(0)); //  Initiateblahblahblah
         }
 
     }
@@ -249,4 +231,28 @@ void printGreetings() {
 
     cout << " Please enter the name of the helper file: ";
 
+}
+
+void InitiateAttackFunctions(Battler& attacker, Battler& opponent, int selected_move) {
+
+        double damage_dealt = attacker.Attack(opponent, selected_move);
+ 
+        if (damage_dealt == -99.9) {
+            /*if this runs, the second battler has been defeated!*/
+        }
+        else if (damage_dealt < 0) {
+            /*checking for special moves*/
+            if (damage_dealt == -1.001) { //'Transform'
+                attacker = opponent;
+                attacker.SetPlayingStatus(true); //accounts for multiple players, false for any non-user players
+            }
+            else if (damage_dealt == -1.002) { //'Flaming Devastation'
+            
+                attacker.SetSpecialAttack(attacker.GetSpecialAttack() * .80); //debuff for attack
+                
+                attacker.Attack(opponent, selected_move, 1); 
+
+            }
+        }
+    
 }
