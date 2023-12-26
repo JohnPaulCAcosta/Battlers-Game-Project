@@ -11,4 +11,8 @@ void battleDisplay(vector<Battler>& battlers);
 
 void printGreetings();
 
+//helper function for battle display, determines numbers for certain scenarios 
+
+void InitiateAttackFunctions(Battler& attacker, Battler& opponent, int selected_move = 0);
+
 #endif
