@@ -67,7 +67,7 @@ class Battler {
         string GetMoves();
         bool GetPlayerStatus();
         void AddMove(string name, string type, char dType, double multiplier);
-        double Attack(Battler& opponent, int t = 1);
+        double Attack(Battler& opponent, int t = 0);
         double CalculateDamage(Move move, char attackType);
         double SpecialMoveIdentifier(string move);
         Battler& operator=(const Battler& otherBattler);
