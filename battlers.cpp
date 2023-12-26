@@ -145,7 +145,7 @@ Battler::Battler(const Battler& otherBattler) : name(otherBattler.name), type(ot
 health(otherBattler.health), physicalAttack(otherBattler.physicalAttack), physicalDefense(otherBattler.physicalDefense), 
 specialAttack(otherBattler.specialAttack), specialDefense(otherBattler.specialDefense),
 move1(otherBattler.move1), move2(otherBattler.move2), move3(otherBattler.move3), 
-playerStatus(otherBattler.playerStatus) { //copy constructor for rule of 3
+playerStatus(otherBattler.playerStatus), image(nullptr) { //copy constructor for rule of 3
 
     this->SetImage(otherBattler.image);
 
@@ -154,7 +154,7 @@ playerStatus(otherBattler.playerStatus) { //copy constructor for rule of 3
 Battler::~Battler() {
 
     /*Deallocate dynamic memory in image*/
-
+    
     if (this->image != nullptr) {
 
         for (unsigned int i = 0; i < 15; i++) {
@@ -330,17 +330,7 @@ double Battler::SpecialMoveIdentifier(string move) {
 
 Type::Type() : name(""), strength1(""), weakness1("") {}
 
-Type::Type(string name, string s, string w) : name(name) {
-
-    if (s != "") {
-        this->strength1 = s;
-    }
-
-    if (w != "") {
-        this->weakness1 = w;
-    }
-
-}
+Type::Type(string name, string s, string w) : name(name), strength1(s), weakness1(w) {}
 
 void Type::SetTypeName(string name) {
     this->name = name;
