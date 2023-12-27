@@ -375,6 +375,14 @@ double Battler::SpecialMoveIdentifier(string move) {
         return -1.001;
 
     }
+    else if (move == "Flaming_Devastation") {
+
+        /*a risk-based move, which trades a high damaging move for a
+        20% debuff to the user's special attack stat*/
+
+        return -1.002;
+
+    }
 
     //else if...
 
