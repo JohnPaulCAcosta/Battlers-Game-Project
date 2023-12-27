@@ -12,9 +12,9 @@ Snail
 Water
 Fire
 Grass
-50.0
-2 7 5 8
-Rolling_Shell null p 3.0
+160.0
+16 23 13 19
+Rolling_Shell null p 2.0
 Leaf_Boulder Grass p 2.5
 Slushy_Surf Water s 2.0
                
@@ -31,10 +31,10 @@ Phoenix
 Fire
 Grass
 Water
-45.0
-6 1 8 5
+135.0
+19 8 29 13
 Peck null p 1.8
-Flaming_Devastation Fire X 3.0
+Flaming_Devastation Fire X 4.2
 Flame_Dash Fire p 2.0
                
                
@@ -50,7 +50,7 @@ Shapesitto
 Null
 Null
 Null
-20
+35.0
 4 4 4 4
 Transform null X 0.0
 Transform null X 0.0
