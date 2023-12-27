@@ -189,7 +189,7 @@ void battleDisplay(vector<Battler>& battlers) {
         if (battlers.at(1).GetHealth() == 0) {
             break;
         }
-        
+
         if (battlers.at(1).GetPlayerStatus()) {
             
             cout << endl;
@@ -197,11 +197,11 @@ void battleDisplay(vector<Battler>& battlers) {
             cin >> selected_move;
             cout << endl;
 
-            InitiateAttackFunctions(battlers.at(1), battlers.at(0), selected_move);   //  InitiateAttackFunctions(battlers.at(0), battlers.at(1), selected_move);
+            InitiateAttackFunctions(battlers.at(1), battlers.at(0), selected_move);
 
         }
         else {
-            InitiateAttackFunctions(battlers.at(1), battlers.at(0)); //  Initiateblahblahblah
+            InitiateAttackFunctions(battlers.at(1), battlers.at(0));
         }
 
     }
@@ -248,7 +248,7 @@ void InitiateAttackFunctions(Battler& attacker, Battler& opponent, int selected_
             }
             else if (damage_dealt == -1.002) { //'Flaming Devastation'
             
-                attacker.SetSpecialAttack(attacker.GetSpecialAttack() * .80); //debuff for attack
+                attacker.SetSpecialAttack(attacker.GetSpecialAttack() * .80); //debuff for special attack
                 
                 attacker.Attack(opponent, selected_move, 1); 
 
