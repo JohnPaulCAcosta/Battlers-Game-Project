@@ -227,7 +227,7 @@ void printGreetings() {
     cout << " Created w/ Visual Studio Code, with Resolution " << endl;
     cout << " of 3840 x 2400                                 " << endl << endl;
 
-    cout << "      ~~~~~     Battling Co. Game     ~~~~~     " << endl << endl;
+    cout << "       ~~~~~  Battler's Game Project  ~~~~~     " << endl << endl;
 
     cout << " Please enter the name of the helper file: ";
 
