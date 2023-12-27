@@ -24,6 +24,7 @@ double Battler::CalculateDamage(Battler& opponent, Move move, char attackType) {
 
     if (attackType == 'p') {
         output = this->physicalAttack * move.GetDamageMultiplier();
+        
     }
     if (attackType == 's') {
         output = this->specialAttack * move.GetDamageMultiplier();
@@ -31,6 +32,15 @@ double Battler::CalculateDamage(Battler& opponent, Move move, char attackType) {
     //identify if special move used, uses the average of the pA and sA
     if (attackType == 'X') {
         output = (this->physicalAttack + this->specialAttack) / 2.0 * move.GetDamageMultiplier();
+    }
+
+    srand(time(NULL));
+    int random_number = rand();
+    /*using an random number generator function allows for random critical hit chances*/
+    
+    if (random_number % 19 == 1){
+        output *= 1.1;
+        cout << "Critical hit! ";
     }
     
     //relevant defense stat times damage multiplier
@@ -59,6 +69,7 @@ double Battler::CalculateDamage(Battler& opponent, Move move, char attackType) {
         output *= 1.10; //battler's moves are amped if types match
     }
 
+   
     return output;
 
 }
@@ -112,11 +123,11 @@ double Battler::Attack(Battler& opponent, int t, int ignore) {
 
         if (currMove.GetMoveTypeName() == opponent.type.GetWeakness()) {
             damage_output *= 1.15;
-            cout << "Critical hit! ";
+            cout << "It's super effective! ";
         }
         else if (currMove.GetMoveTypeName() == opponent.type.GetStrength()) {
             damage_output *= 0.85;
-            cout << "Weak hit... ";
+            cout << "It's not very effective... ";
         }
 
         opponent.SetHealth(opponent.GetHealth() - damage_output);
