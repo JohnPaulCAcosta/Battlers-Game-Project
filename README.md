@@ -10,7 +10,8 @@ My first project utilizes what I learned in Texas A&M's Introduction to Program 
 # For those running the game
 
 Quick Overview of how the game runs:
- 1. Enter 'helper.txt' as the helper file (you can create your own with the guidelines defined below) to load characters to battler with
+ 1. Ctrl + Shift + B (Build Task, then Run), everything else happens in terminal
+ 2. Enter 'helper.txt' as the helper file (you can create your own with the guidelines defined below) to load characters to battler with
  2. Pick the number of local players
  3. Pick moves to try to defeat the other battler
  4. Choose to play again or stop playing
